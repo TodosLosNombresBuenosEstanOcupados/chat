@@ -18,16 +18,16 @@ public class Server {
     try {
       serverSocket = new ServerSocket(puerto);
       servidorConexiones = new ArrayList<ConnectionThread>();
-      printServerInformation();
+      mostrarSocketServer();
 
     } catch (IOException e) {
       System.out.println("Error en el puerto elegido" + String.valueOf(puerto));
       System.exit(-1);
     }
 
-    // Start listening for connections on that port.
-    boolean finishedListening = false;
-    while(!finishedListening) {
+    // escucho conexiones en el puerto.
+    boolean finConexion = false;
+    while(!finConexion) {
 
       //Espero peticiones de los socketl cliente
       try {
@@ -49,7 +49,7 @@ public class Server {
   }
 
   
-  private void printServerInformation() {
+  private void mostrarSocketServer() {
     String estado = "Ejecutando servidor " +
       String.valueOf(serverSocket.getInetAddress().getHostName()) +
       " en el puerto " + String.valueOf(serverSocket.getLocalPort());
