@@ -14,17 +14,17 @@ public class Cliente {
 	private DataInputStream in;
 	private String msj;
 	private static DataOutputStream out;
-	private int puerto = 1000;
+	private int puerto;
 	private ReceiveThreadMesage r;
 	private String ip;
 
 	public Cliente() {
 		try {
 			leerConfig();
-			Socket cliente = new Socket(this.ip, this.puerto);
+			cliente = new Socket(this.ip, this.puerto);
 			in = new DataInputStream(cliente.getInputStream());
 			out = new DataOutputStream(cliente.getOutputStream());
-			r = new ReceiveThreadMesage(msj,in);
+			r = new ReceiveThreadMesage(in);
 			r.start();
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Servidor {
 
 	private ServerSocket socket;
-	private int puerto=1000;
+	private int puerto;
 	private ArrayList<Socket> sala1;
 	private ArrayList<Socket> sala2;
 	private ArrayList<Socket> sala3;
@@ -41,8 +41,6 @@ public class Servidor {
 		linea =sc.nextLine();
 		splitLine=linea.split(":");
 		this.puerto=Integer.parseInt(splitLine[1]);
-
-
 	}
 
 	public static void main(String[] args) throws FileNotFoundException {

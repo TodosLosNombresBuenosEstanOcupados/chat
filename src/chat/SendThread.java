@@ -5,6 +5,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import com.google.gson.Gson;
+
 public class SendThread extends Thread {
 
 	private LinkedBlockingQueue<String> outgoingMessages;
@@ -12,6 +14,7 @@ public class SendThread extends Thread {
 	private ArrayList<Socket> users;
 	private Socket sk;
 	private int id;
+	private Gson gson;
 
 	public SendThread(LinkedBlockingQueue<String> outgoingMess, DataOutputStream dataOut, int idUser,
 			ArrayList<Socket> lstUsers) {
@@ -19,6 +22,7 @@ public class SendThread extends Thread {
 		this.out=dataOut;
 		this.id=idUser;
 		this.users=lstUsers;
+		this.gson=new Gson();
 	}
 
 	public void run() {
@@ -28,7 +32,7 @@ public class SendThread extends Thread {
 				for (int i = 0; i < users.size(); i++) {
 					out = new DataOutputStream(users.get(i).getOutputStream());
 					msj=id+": "+outgoingMessages.take();
-					out.writeUTF(msj);
+					out.writeUTF(gson.toJson(msj));
 					out.flush();
 				}
 			}

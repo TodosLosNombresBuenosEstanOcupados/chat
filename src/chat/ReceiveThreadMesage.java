@@ -5,25 +5,22 @@ import java.io.DataInputStream;
 public class ReceiveThreadMesage extends Thread {
 
 	private DataInputStream in;
-	private String msj;
 
-	public ReceiveThreadMesage(String m, DataInputStream dataIn) {
+	public ReceiveThreadMesage( DataInputStream dataIn) {
 		in=dataIn;
-		this.msj=m;
 	}
 
 	public void run(){
 		while(true){
-			this.msj=leerRespuesta();
+			leerRespuesta();
 		}
 	}
-	public String leerRespuesta() {
+	public void leerRespuesta() {
 		try {
-			return in.readUTF();
+			System.out.println(in.readUTF());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return msj;
 	}
 
 }
