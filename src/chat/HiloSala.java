@@ -14,7 +14,7 @@ public class HiloSala extends Thread {
 
 	public HiloSala(Socket clientSocket, ArrayList<Socket> sala1, ArrayList<Socket> sala2, ArrayList<Socket> sala3, int id) {
 		this.sk = clientSocket;
-		String salasDisp = "1 2 3";
+		String salasDisp = "Ingrese el numero de sala a la cual conectarse 1 - 2 - 3:";
 		String resp = "";
 		try {
 			in = new DataInputStream(sk.getInputStream());

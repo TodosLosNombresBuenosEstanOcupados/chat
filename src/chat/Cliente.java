@@ -1,18 +1,21 @@
 package chat;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.Scanner;
 
 import com.google.gson.Gson;
 
-public class Cliente extends Thread {
+public class Cliente {
 	private Socket cliente;
 	private static DataOutputStream out;
+	private DataInputStream in;
 	private int puerto;
 	private String ip;
 	private Gson gson;
@@ -44,7 +47,7 @@ public class Cliente extends Thread {
 
 	public void enviarMensaje(String msj) {
 		try {
-//			out.writeUTF(gson.toJson(msj));
+			//out.writeUTF(gson.toJson(msj));
 			out.writeUTF(msj);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

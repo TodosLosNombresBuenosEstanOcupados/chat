@@ -14,7 +14,7 @@ public class ClienteHilo extends Thread {
 
 	public ClienteHilo(Socket cliente) throws IOException {
 		this.sk = cliente;
-		gsonRead= new Gson();
+		//gsonRead= new Gson();
 		this.in = new DataInputStream(sk.getInputStream());
 	}
 
@@ -26,7 +26,7 @@ public class ClienteHilo extends Thread {
 
 	public void leerRespuesta() {
 		try {
-//			System.out.println(gsonRead.fromJson(in.readUTF(),String.class) + "\n");
+			//System.out.println(gsonRead.fromJson(in.readUTF(),String.class) + "\n");
 			System.out.println(in.readUTF()+ "\n");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

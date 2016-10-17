@@ -29,10 +29,10 @@ public class SendThread extends Thread {
 		String msj="";
 		try {
 			while (true) {
+				msj=outgoingMessages.take();
 				for (int i = 0; i < users.size(); i++) {
 					out = new DataOutputStream(users.get(i).getOutputStream());
-					msj=id+": "+outgoingMessages.take();
-					out.writeUTF(gson.toJson(msj));
+					out.writeUTF(gson.toJson(users.get(i).getInetAddress()+": "+msj));
 					out.flush();
 				}
 			}
