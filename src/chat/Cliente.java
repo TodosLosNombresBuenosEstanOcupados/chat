@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 
 public class Cliente {
 	private Socket cliente;
-	private static DataOutputStream out;
+	private DataOutputStream out;
 	private DataInputStream in;
 	private int puerto;
 	private String ip;
@@ -25,8 +25,8 @@ public class Cliente {
 			leerConfig();
 			this.cliente = new Socket(this.ip, this.puerto);
 			out = new DataOutputStream(cliente.getOutputStream());
-			//gson= new Gson();
 			new ClienteHilo(cliente).start();
+			gson= new Gson();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -47,8 +47,8 @@ public class Cliente {
 
 	public void enviarMensaje(String msj) {
 		try {
-			//out.writeUTF(gson.toJson(msj));
-			out.writeUTF(msj);
+			out.writeUTF(gson.toJson(msj));
+			out.flush();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

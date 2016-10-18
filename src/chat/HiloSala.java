@@ -6,22 +6,26 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import com.google.gson.Gson;
+
 public class HiloSala extends Thread {
 
 	private DataInputStream in;
 	private DataOutputStream out;
 	private Socket sk;
+	private Gson gson;
 
 	public HiloSala(Socket clientSocket, ArrayList<Socket> sala1, ArrayList<Socket> sala2, ArrayList<Socket> sala3, int id) {
 		this.sk = clientSocket;
+		this.gson= new Gson();
 		String salasDisp = "Ingrese el numero de sala a la cual conectarse 1 - 2 - 3:";
 		String resp = "";
 		try {
 			in = new DataInputStream(sk.getInputStream());
 			out = new DataOutputStream(sk.getOutputStream());
 
-			out.writeUTF(salasDisp);
-			resp = in.readUTF();
+			out.writeUTF(gson.toJson(salasDisp));
+			resp = gson.fromJson(in.readUTF(),String.class);
 
 			if (resp.equals("1")) {
 				sala1.add(clientSocket);
